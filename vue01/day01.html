@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+
+<body>
+    <div id="app">
+        {{message}}
+    </div>
+    <!-- v-bind指令将这个元素节点的 title 属性和 Vue 实例的 message 属性绑定到一起。-->
+    <div id="app-2">
+        <span v-bind:title="message">
+        你说你好啊啊~
+    </span>
+    </div>
+    <!--v-if 删除元素-->
+    <div id="app-3">
+        <p v-if="seen">
+            Now you see me
+        </p>
+    </div>
+    <!--v-for 指令可以绑定数据到数组来渲染一个列表 插入元素-->
+    <div id="app-4">
+        <ol>
+            <li v-for="todo in todos">
+                {{todo.text}}
+            </li>
+        </ol>
+    </div>
+    <!--处理用户输入-->
+    <!--v-on 指令绑定一个监听事件-->
+    <div id="app-5">
+        <p>{{message}}</p>
+        <button v-on:click="reverseMessage">Reverse Message</button>
+    </div>
+    <!--v-model 指令，它使得在表单输入和应用状态中做双向数据绑定-->
+    <div id="app-6">
+        <p>{{message}}</p>
+        <input v-model="message">
+    </div>
+
+</body>
+<script src="https://unpkg.com/vue/dist/vue.js"></script>
+<script src="day01.js"></script>
+
+</html>

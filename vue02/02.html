@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue实例</title>
+</head>
+<body>
+<script src="../vue/dist/vue.js"></script>
+<script>
+    <!--所有的 Vue.js 组件其实都是被扩展的 Vue 实例-->
+    var vm = new Vue({
+
+    })
+    var MyComponent = Vue.extend({
+//    扩展选项
+    })
+//    所有的"MyComponent"实例都将以预定义的扩展选项被创建
+    var myComponentInstance = new MyComponent()
+</script>
+</body>
+</html>
