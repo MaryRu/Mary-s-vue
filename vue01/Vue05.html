@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Vue05-Vue Class 与 Style 绑定</title>
+  <style>
+      .active{
+        color: red;
+      }
+      .text-danger{
+        background-color: #ccc;
+      }
+      .pad{
+        padding: 0.75rem;
+        background-color: #f5f5f5;
+      }
+  </style>
+
+</head>
+<body>
+  <!--对象语法-->
+  <div id="example">
+    <div class="static" v-bind:class="{ active: isActive,'text-danger': hasError}">
+        凌晨的时候 你抬头 空无一人
+    </div>
+  </div>
+  <div id="example1">
+    <div v-bind:class="classObject">
+      when the sun comes , you are my shade .
+    </div>
+  </div>
+  <!--数组语法-->
+    <div id="example2" v-bind:class="[isActive ? activeClass : '', errorClass]">
+      Let the stars shine through.
+    </div>
+
+    <!--绑定内联样式-->
+    <div id="example3">
+      <div v-bind:style="{ color: activeColor, fontSize: fontSize + 'px' }">
+        With or without you
+      </div>
+    </div>
+
+  <script src="https://unpkg.com/vue/dist/vue.js"></script>
+  <script src="js/Vue05.js"></script>
+</body>
+</html>
