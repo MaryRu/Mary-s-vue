@@ -68,3 +68,70 @@ var app7 = new Vue({
     ]
   }
 })
+
+// 计算属性
+var example = new Vue({
+  el: '#example',
+  data: {
+    message: 'Hello'
+  },
+  computed: {
+    // a computed getter
+    reversedMessage: function () {
+      // `this` points to the vm instance
+      return this.message.split('').reverse().join('')
+    }
+  }
+})
+
+var test = new Vue({
+  el: '#test',
+    data: {
+    isActive: true,
+    error: null
+  },
+  computed: {
+    classObject: function () {
+      return {
+        active: this.isActive && this.error,
+        'text-danger': this.error && this.error.type === 'fatal',
+      }
+    }
+  }
+})
+
+var debounce = new Vue({
+  el: '#debounce-search-demo',
+  data: {
+    searchQuery: '',
+    searchQueryIsDirty: false,
+    isCalculating: false
+  },
+  computed: {
+    searchIndicator: function () {
+      if (this.isCalculating) {
+        return '⟳ Fetching new results'
+      } else if (this.searchQueryIsDirty) {
+        return '... Typing'
+      } else {
+        return '✓ Done'
+      }
+    }
+  },
+  watch: {
+    searchQuery: function () {
+      this.searchQueryIsDirty = true
+      this.expensiveOperation()
+    }
+  },
+  methods: {
+    // 这是 debounce 实现的地方。
+    expensiveOperation: _.debounce(function () {
+      this.isCalculating = true
+      setTimeout(function () {
+        this.isCalculating = false
+        this.searchQueryIsDirty = false
+      }.bind(this), 1000)
+    }, 500)
+  }
+})
