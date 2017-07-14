@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Vue01-Vue介绍</title>
 </head>
 
 <body>
@@ -19,7 +19,7 @@
     <!--v-if 删除元素-->
     <div id="app-3">
         <p v-if="seen">
-            Now you see me
+            你看到我了哟~~
         </p>
     </div>
     <!--v-for 指令可以绑定数据到数组来渲染一个列表 插入元素-->
@@ -42,8 +42,17 @@
         <input v-model="message">
     </div>
 
+    <!--组件化应用构建-->
+    <div id="app-7">
+        <ol>
+            <!-- 现在我们为每个todo-item提供待办项对象 -->
+            <!-- 待办项对象是变量，即其内容可以是动态的 -->
+            <todo-item v-for="item in goodsList" v-bind:todo="item" v-bind:key="item.id"></todo-item>
+        </ol>
+    </div>
+
 </body>
 <script src="https://unpkg.com/vue/dist/vue.js"></script>
-<script src="day01.js"></script>
+<script src="js/Vue01.js"></script>
 
 </html>

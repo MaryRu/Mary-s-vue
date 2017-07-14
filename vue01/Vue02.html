@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Vue02-Vue实例</title>
+  <script src="https://unpkg.com/vue/dist/vue.js"></script>
+</head>
+<body>
+  <div id="example"></div>
+  <script>
+   // 1.所有的 Vue.js 组件其实都是被扩展的 Vue 实例
+   // 2.每个 Vue 实例都会代理其 data 对象里所有的属性
+   var data = {a:1};
+   var vm = new Vue({
+     data:data
+   })
+    // console.log(vm.a === data.a)
+    // vm.a = 2;
+    // console.log(data.a)
+    // data.a = 3;
+    // console.log(vm.a)
+    var data = {a:1}
+    var vm = new Vue({
+      el:'#example',
+      data:data
+    })
+    vm.$data === data //true
+    vm.$el === document.getElementById('example') //true
+    // $watch是一个实例方法
+    vm.$watch('a',function(newVal,oldVal){
+      
+    })
+
+    var vm = new Vue({
+      data:{
+        a:1
+      },
+      created:function(){
+        console.log('a is :' + this.a)
+      }
+    })
+    
+
+  </script>
+  
+</body>
+</html>

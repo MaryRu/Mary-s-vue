@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Vue07-Vue事件处理器</title>
+</head>
+
+<body>
+  <!--监听事件-->
+  <div id="example-1">
+    <button type="" v-on:click="counter += 1">点我就+1</button>
+    <p>这个按钮被点了 {{counter}} 次</p>
+  </div>
+  <!--方法事件处理器-->
+  <div id="example-2">
+    <!-- `greet` 是在下面定义的方法名 -->
+    <button v-on:click="greet">Greet</button>
+  </div>
+
+  <script src="https://unpkg.com/vue/dist/vue.js"></script>
+  <script src="js/Vue07.js"></script>
+</body>
+
+</html>

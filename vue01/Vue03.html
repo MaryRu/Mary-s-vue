@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Vue03-Vue模板语法</title>
+
+</head>
+
+<body>
+  <span id="app" v-once>Message: {{msg}}</span>
+  <div v-html="rawHtml">
+    <p>啦啦啦啦啦啦</p>
+    <p>啦啦啦啦啦啦</p>
+  </div>
+
+  <div id="app1">
+    <div v-bind:id="dynamicId">aaaa </div>
+  </div>
+  <div id="app2">
+    <button v-bind:disabled="isButtonDisabled">Button</button>
+  </div>
+  <div id="app3">
+    {{ number + 1 }} 
+    {{ ok ? 'YES' : 'NO' }} 
+    {{ message.split('').join('-') }}
+    <div v-bind:id="'list-' + id">
+      我有随机数id
+    </div>
+  </div>
+  <div id="app4">
+    <form v-on:submit.prevent="onSubmit">
+      <label for="GET-name">Name:</label>
+      <input id="GET-name" type="text" name="name">
+      <input type="submit" value="Save">
+    </form>
+  </div>
+
+</body>
+<script src="https://unpkg.com/vue/dist/vue.js"></script>
+<script src="js/Vue03.js"></script>
+
+</html>
