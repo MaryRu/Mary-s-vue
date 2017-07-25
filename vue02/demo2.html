@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Vue - demo2组件</title>
+</head>
+<body>
+  <!-- 一.组件使用的基本步骤 -->
+  <div id="app">
+    <!-- #app是Vue实例挂载的元素，应该在挂载元素范围内使用组件,my-component只能在#app下使用 -->
+    <my-component></my-component>
+  </div>
+  <!-- 二.组件的局部注册 -->
+  <div id="app1">
+    <!-- 不能使用my-component组件，因为my-component是一个局部组件，它属于#app-->
+     <my-component></my-component>
+  </div>
+</body>
+<script src="https://unpkg.com/vue/dist/vue.js"></script>
+<script>
+  // 1.创建构造器
+  var myComponent = Vue.extend({
+    template:'<div class="body"><div><div>组件的小测试</div><p>一开始就明白结果</p><span>给你最后一首</span></div><div>2222</div></div>'
+  })
+  // 2.注册组件，并制定组件的标签，组件的HTML标签为<my-component>
+  Vue.component('my-component',myComponent)
+
+  new Vue({
+    el:'#app1',
+    components:{
+      // 将myComponent组件注册到Vue实例下
+      'my-component':myComponent
+    }
+
+  })
+
+  new Vue({
+    el:'#app',
+    el:'#app1'
+  })
+</script>
+</html>

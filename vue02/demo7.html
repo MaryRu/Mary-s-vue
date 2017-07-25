@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Vue - 数据双向绑定</title>
+  <link rel="stylesheet" href="css/demo1.css">
+</head>
+
+<body>
+  <!-- prop 是单向绑定的：当父组件的属性变化时，将传导给子组件，但是不会反过来。每次父组件更新时，子组件的所有 prop 都会更新为最新值。这意味着你不应该在子组件内部改变 prop。.sync是Vue1.0中存在的属性，2.0之后不能实现数据双向绑定的功能。需要实现数据双向绑定时，使用内置的$emit将值传给父组件，由父组件修改后重新传给子组件，以达到双向绑定的效果。 案例并没有实现  -->
+  <div id="counter-event-example">
+    <p>{{total}}</p>
+  </div>
+  <button-counter v-on:increment="incrementTotal"></button-counter>
+  <button-counter v-on:increment="incrementTotal"></button-counter>
+</body>
+<script src="https://unpkg.com/vue/dist/vue.js"></script>
+<script>
+  Vue.component('button-counter',{
+    template:'<button v-on:click="increment">{{counter}}</button>',
+    data:function(){
+      return{
+        counter:0
+      }
+    },
+    methods:{
+      increment:function(){
+        this.counter += 1
+        this.$emit('incrment')
+      }
+    }
+  })
+
+  new Vue({
+    el:'#counter-event-example',
+    data:{
+      total:0
+    },
+    methods:{
+      incrementTotal:function(){
+        this.total += 1
+      }
+    }
+  })
+
+</script>
+
+</html>

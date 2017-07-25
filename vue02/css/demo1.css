@@ -15,6 +15,7 @@ table,td,th{
   border-spacing: 0
 }
 table {
+	margin-top: 2rem;
 	width: 100%
 }
 td,th{
