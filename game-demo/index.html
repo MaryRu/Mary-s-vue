@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>赛马动画</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="header">
+    <h1>赛马动画</h1>
+  </div>
+  <div class="main">
+    <div class="game-wrap">
+      <div class="game">
+        <ul>
+          <li><img class="horse" src="images/m11.png" alt=""></li>
+          <li><img class="horse" src="images/m21.png" alt=""></li>
+          <li><img class="horse" src="images/m31.png" alt=""></li>
+          <li><img class="horse" src="images/m41.png" alt=""></li>
+          <li><img class="horse" src="images/m51.png" alt=""></li>
+          <li><img class="horse" src="images/m61.png" alt=""></li>
+          <li><img class="horse" src="images/m71.png" alt=""></li>
+          <li><img class="horse" src="images/m81.png" alt=""></li>
+          <li><img class="horse" src="images/m91.png" alt=""></li>
+          <li><img class="horse" src="images/m101.png" alt=""></li>
+        </ul>
+      </div>
+    </div>
+    <button id="btn" type="button">开始</button>
+  </div>
+<script src="js/tween.js"></script>
+<script src="js/animation.js"></script>
+<script>
+var horses = document.querySelectorAll('.horse');
+var t = [,350,400,450,500,550,600,650,700,750,800];
+var rank = [1,4,2,3,8,9,5,7,10,6]
+
+var imgsrc = ['images/m1.gif', 'images/m2.gif', 'images/m3.gif', 'images/m4.gif', 'images/m5.gif', 'images/m6.gif', 'images/m7.gif', 'images/m8.gif', 'images/m9.gif', 'images/m10.gif'];
+var imgsrc1 = ['images/m11.png', 'images/m21.png', 'images/m31.png', 'images/m41.png', 'images/m51.png', 'images/m61.png', 'images/m71.png', 'images/m81.png', 'images/m91.png', 'images/m101.png'];
+function run(){
+  document.querySelector('.game-wrap').scrollLeft = 0;
+  var camera = setInterval(function(){
+    document.querySelector('.game-wrap').scrollLeft++;
+  }, 40);
+  for(var i = 0; i < horses.length; i++){
+    (function(index){
+      var horse = horses[index];
+      var start = 0;
+      var begin = 0;
+      var end = (470 - 45);
+      var during = t[rank[index]];
+      horse.src = imgsrc[index];
+      var step = function(){
+        var left = Math.tween.Linear(start, begin, end, during);
+        horse.style.transform = 'translateX(' + left + 'px)';
+        start++;
+        if(start <= during){
+          requestAnimationFrame(step);
+        }else{
+          clearInterval(camera);
+          horse.src = imgsrc1[index];
+        }
+      }
+      step();
+    }(i))
+  }
+}
+function restore(){
+  for(var i = 0; i < horses.length; i++){
+    horses[i].style.transform = 'translateX(0px)';
+  }
+  document.querySelector('.game-wrap').scrollLeft = 0;
+}
+run()
+</script>
+</body>
+</html>
