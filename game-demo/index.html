@@ -73,7 +73,10 @@ function restore(){
   }
   document.querySelector('.game-wrap').scrollLeft = 0;
 }
-run()
+var $btn = document.getElementById('btn');
+$btn.addEventListener('click', function(){
+  run()
+})
 </script>
 </body>
 </html>
