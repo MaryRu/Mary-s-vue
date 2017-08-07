@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>cannvas</title>
+</head>
+<body>
+  <canvas id="myCanvas"></canvas>
+  <script>
+    var canvas=document.getElementById('myCanvas');
+    var ctx=canvas.getContext('2d');
+    ctx.fillStyle='#ddd';
+    ctx.fillRect(10,10,130,130);
+    // 利用path绘制复杂路径
+    var path = new Path2D();
+    path.arc(75,75,50,0,Math.PI*2,true);
+    path.moveTo(110,75);
+    path.arc(75,75,35,0,Math.PI,false);
+    path.moveTo(65,65);
+    path.arc(60,65,5,0,Math.PI,true);
+    path.moveTo(95,65);
+    path.arc(90,65,5,0,Math.PI,true);
+    ctx.strokeStyle = "#0000ff";
+    ctx.stroke(path);
+  </script>
+</body>
+</html>
