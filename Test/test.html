@@ -159,16 +159,43 @@
       }
       return newArr.length;
     }
-    console.log(count([1, 2, 4, 4, 3, 4, 3], 4))
-      // 找出数组 arr 中重复出现过的元素
+    // console.log(count([1, 2, 4, 4, 3, 4, 3], 4))
+    // 找出数组 arr 中重复出现过的元素
     function duplicates(arr) {
       var newArr = [];
+      arr.sort();
       for (var i = 0; i < arr.length; i++) {
-        if (arr[i] == item) {
+        if (arr[i] == arr[i + 1]) {
+          newArr.push(arr[i]);
+          while (arr[i] == arr[i + 1]) {
+            i++;
+          }
+        }
+      }
+      return newArr;
+    }
+    // console.log(duplicates([1, 2, 4, 4, 3, 3, 1, 5, 3]))
+    // 为数组 arr 中的每个元素求二次方。不要直接修改数组 arr，结果返回新的数组
+    function square(arr) {
+      var newArr = [];
+      for (var i = 0; i < arr.length; i++) {
+        arr[i] *= arr[i];
+        newArr.push(arr[i]);
+      }
+      return newArr;
+    }
+    // console.log(square([1, 2, 3, 4]))
+    // 在数组 arr 中，查找值与 item 相等的元素出现的所有位置
+    function findAllOccurrences(arr, target) {
+      var newArr = [];
+      for (var i = 0; i < arr.length; i++) {
+        if (arr[i] == target) {
           newArr.push(i);
         }
       }
+      return newArr;
     }
+    console.log(findAllOccurrences([1, 2, 3, 4, 5, 1, 2, 4, 1], 1))
   </script>
 
 </body>
