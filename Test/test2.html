@@ -77,13 +77,239 @@
     function argsAsArray(fn, arr) {
       return fn.apply(this, arr);
     }
-    argsAsArray(function(greeting, name, punctuation) {
-      console.log(greeting + ', ' + name + (punctuation || '!'));
-    }, ['Hello', 'Ellie', '!'])
+    // argsAsArray(function(greeting, name, punctuation) {
+    //   console.log(greeting + ', ' + name + (punctuation || '!'));
+    // }, ['Hello', 'Ellie', '!'])
 
     // 柯里化
-    // 已知 fn 为一个预定义函数， 实现函数 curryIt， 调用之后满足如下条件： 1、 返回一个函数 a， a 的 length 属性值为 1（ 即显式声明 a 接收一个参数）; 2、 调用 a 之后， 返回一个函数 b, b 的 length 属性值为 1 ;3、 调用 b 之后， 返回一个函数 c, c 的 length 属性值为 1; 4、 调用 c 之后， 返回的结果与调用 fn 的返回值一致; 5、 fn 的参数依次为函数 a, b,c 的调用参数
+    // 已知 fn 为一个预定义函数， 实现函数 curryIt， 调用之后满足如下条件：
+    //  1、 返回一个函数 a， a 的 length 属性值为 1（ 即显式声明 a 接收一个参数）; 
+    //  2、 调用 a 之后， 返回一个函数 b, b 的 length 属性值为 1 ;
+    //  3、 调用 b 之后， 返回一个函数 c, c 的 length 属性值为 1;
+    //   4、 调用 c 之后， 返回的结果与调用 fn 的返回值一致; 
+    //   5、 fn 的参数依次为函数 a, b,c 的调用参数
     function curryIt(fn) {
+      var length = fn.length;
+      var args = [];
+      var result = function(arg) {
+        args.push(arg);
+        length--;
+        if (length <= 0) {
+          return fn.apply(this, args)
+        } else {
+          return result;
+        }
+      }
+      return result;
+    }
+    var fn = function(a, b, c) {
+        return a + b + c;
+      }
+      // console.log(curryIt(fn)(1)(2)(3))
+
+    function functionFunction(str) {
+      var f = function(s) {
+        return str + ', ' + s
+      };
+      return f;
+    }
+    // console.log(functionFunction('Hello')('world').toString())
+
+    // 闭包
+    // 1、 返回一个函数数组 result， 长度与 arr 相同
+    // 2、 运行 result 中第 i 个函数， 即 result[i]()， 结果与 fn(arr[i]) 相同
+
+    function makeClosures(arr, fn) {
+      var result = [];
+      for (var i = 0; i < arr.length; i++) {
+        result[i] = function(num) {
+          return function() {
+            return fn(num)
+          }
+        }(arr[i])
+      }
+      return result;
+    }
+
+    // 二次封装函数(1)
+    // 1、返回一个函数 result，该函数接受一个参数
+    // 2、执行 result(str3) ，返回的结果与 fn(str1, str2, str3) 一致
+    function partial(fn, str1, str2) {
+      function result(str3) {
+        return fn.call(this, str1, str2, str3)
+      }
+      return result;
+    }
+
+    // 二次封装函数(2)
+    //     1、返回一个函数 result
+    // 2、调用 result 之后，返回的结果与调用函数 fn 的结果一致
+    // 3、fn 的调用参数为 partialUsingArguments 的第一个参数之后的全部参数以及 result 的调用参数
+    function partialUsingArguments(fn) {
+      var args = [].slice.call(arguments);
+      var newArgs = args.slice(1);
+      var result = function() {
+        return fn.apply(this, newArgs.concat([].slice.call(arguments)))
+      }
+      return result;
+    }
+
+    // 使用arguments.
+    // 函数 useArguments，返回所有调用参数相加后的结果。
+    function useArguments() {
+      var args = [].slice.call(arguments); // 先把arguments变成数组,后数组求和
+      var sum = 0;
+      for (var i = 0; i < args.length; i++) {
+        sum += args[i];
+      }
+      return sum;
+    }
+    // console.log(useArguments(1, 2, 3, 4))
+
+    // 使用 apply 调用函数
+    // 1、 返回的结果为调用 fn 之后的结果
+    // 2、 fn 的调用参数为 callIt 的第一个参数之后的全部参数
+    function callIt(fn) {
+      var args = [].slice.call(arguments);
+      var newArgs = args.slice(1);
+      return fn.apply(this, newArgs)
+    }
+
+    // 模块
+    // 1、返回一个对象
+    // 2、对象的 greeting 属性值等于 str1， name 属性值等于 str2
+    // 3、对象存在一个 sayIt 方法，该方法返回的字符串为 greeting属性值 + ', ' + name属性值
+    function createModule(str1, str2) {
+      var newObject = {
+        greeting: str1,
+        name: str2,
+        sayIt: function() {
+          return this.greeting + ', ' + this.name
+        }
+      }
+      return newObject;
+    }
+
+    // 二进制转换
+    function valueAtBit(num, bit) {
+      var s = num.toString(2);
+      return s[s.length - bit]
+    }
+
+    // 二进制转十进制
+    function base10(str) {
+      var num = parseInt(str, 2);
+      return num;
+    }
+
+    // 将数字转换为二进制,如果字符串长度不足 8 位，则在前面补 0 到满8位。
+    function convertToBinary(num) {
+      var s = num.toString(2).split("");
+      while (s.length < 8) {
+        s.unshift('0')
+      }
+      var result = s.join('')
+      return result;
+    }
+    // console.log(convertToBinary(65))
+
+    // 将函数 fn 的执行上下文改为 obj，返回 fn 执行后的值
+    function alterContext(fn, obj) {
+      return fn.call(obj, obj)
+    }
+    // console.log(alterContext(function() {
+    //   return this.greeting + ', ' + this.name + '!';
+    // }, {
+    //   name: 'Rebecca',
+    //   greeting: 'Yo'
+    // }))
+
+    // 给定一个构造函数 constructor，请完成 alterObjects 方法，将 constructor 的所有实例的 greeting 属性指向给定的 greeting 变量。
+    function alterObjects(constructor, greeting) {
+      constructor.prototype.greeting = greeting;
+    }
+    var C = function(name) {
+      this.name = name;
+      return this;
+    };
+    var obj1 = new C('Rebecca');
+    // console.log((C, 'What\'s up'));
+    // console.log(obj1.greeting);
+
+    // 属性遍历
+    // 1、返回数组，格式为 key: value
+    // 2、结果数组不要求顺序
+    function iterate(obj) {
+      var arr = [];
+      for (var key in obj) {
+        if (obj.hasOwnProperty(key)) {
+          arr.push(key + ': ' + obj[key])
+        }
+      }
+      return arr;
+    }
+    var C = function() {
+      this.foo = 'bar';
+      this.baz = 'bim';
+    };
+    C.prototype.bop = 'bip';
+    iterate(new C());
+    // console.log(iterate(new C()))
+
+
+    // 正则表达式
+    // 给定字符串 str，检查其是否包含数字，包含返回 true，否则返回 false
+    function containsNumber(str) {
+      // match() 方法可在字符串内检索指定的值，或找到一个或多个正则表达式的匹配
+      if (str.match(/\d+/g)) {
+        alert('有数字')
+      }
+      return str;
+    }
+
+    //给定字符串 str，检查其是否包含连续重复的字母（a-zA-Z），包含返回 true，否则返回 false
+    function containsRepeatingLetter(str) {
+      // test() 方法用于检测一个字符串是否匹配某个模式
+      return /([a-zA-Z])\1/.test(str);
+    }
+    // console.log(containsRepeatingLetter('ratt1l1e1r'))
+
+    // 判断是否以元音字母结尾
+    // 1、元音字母包括 a，e，i，o，u，以及对应的大写
+    // 2、包含返回 true，否则返回 false
+    function endsWithVowel(str) {
+      return /[a,e,i,o,u]$/i.test(str);
+    }
+    // console.log(endsWithVowel('gori'))
+
+    // 给定字符串 str，检查其是否包含 连续3个数字 
+    // 1、如果包含，返回最新出现的 3 个数字的字符串
+    // 2、如果不包含，返回 false
+    function captureThreeNumbers(str) {
+      var reg;
+      if (reg = str.match(/(\d{3})/)) {
+        return reg[0];
+      } else {
+        return false;
+      }
+
+    }
+    // console.log(captureThreeNumbers('6781353'))
+
+    // 给定字符串 str，检查其是否符合如下格式
+    // 1、XXX-XXX-XXXX
+    // 2、其中 X 为 Number 类型
+    function matchesPattern(str) {
+      return /^(\d{3}-){2}\d{4}$/.test(str);
+    }
+    // console.log(matchesPattern('800-555-1212'))
+
+    // 给定字符串 str，检查其是否符合美元书写格式
+    // 1、以 $ 开始
+    // 2、整数部分，从个位起，满 3 个数字用 , 分隔
+    // 3、如果为小数，则小数部分长度为 2
+    // 4、正确的格式如：$1,023,032.03 或者 $2.03，错误的格式如：$3,432,12.12 或者 $34,344.3
+    function isUSD(str) {
 
     }
   </script>

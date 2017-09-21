@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>网易云课堂 - 函数</title>
+</head>
+
+<body>
+  <script>
+    // 函数可以赋值
+    var sum = function(a, b) {
+      return a + b;
+    }
+    var add = sum;
+    // console.log(typeof add)
+    // console.log(add(1, 3))
+
+    // 回调函数
+    function add(a, b) {
+      return a() + b();
+    }
+
+    function one() {
+      return 1;
+    };
+
+    function two() {
+      return 2;
+    }
+    // console.log(add(one(), two()))
+
+    // 匿名函数:
+    // 1.可以作为一个参数传递给其他函数
+    // 2.可以定义某个匿名函数来执行某些一次性任务
+    var abc = function(a, b) {
+        return a + b;
+      }
+      // console.log(1, 2)
+
+    // 柯里化
+    var smallKenan = function(action) {
+      var bigKenan = function(doing) {
+        var result = "";
+        if (action === "take drugs") {
+          if (doing === "bathWithGirlFriend") {
+            result = "尖叫，新一，你这个色狼，然后一巴掌，脸煮熟了~";
+          } else if (doing === "pointOutKiller") {
+            result = "新一，这个案子就交给你的，快点找出谁是凶手吧~";
+          }
+        } else {
+          if (doing === "bathWithGirlFriend") {
+            result = "来吧，柯南，一起洗澡吧~";
+          } else if (doing === "pointOutKiller") {
+            result = "小孩子家，滚一边去！";
+          }
+        }
+        // console.log(result);
+        return arguments.callee; // 等同于return bigKenan
+      };
+      return bigKenan;
+    };
+    smallKenan("take drugs")("bathWithGirlFriend")("pointOutKiller");
+
+    // 闭包：一个函数访问了他的外部变量(函数)，那么他就是一个闭包
+    var db = (function() {
+        var data = {};
+        return function(key, val) {
+          if (val === undefined) {
+            return data[key]
+          } else {
+            return data[key] = val
+          }
+        }
+      })()
+      // console.log(db('x', 1))
+
+    // get,set实例
+    var getValue, setValue;
+    (function() {
+      var secret = 0;
+      getValue = function() {
+        return secret;
+      };
+      setValue = function(v) {
+        secret = v;
+      }
+    })()
+    setValue('123');
+    // console.log(getValue());
+
+    // 闭包迭代器
+    function setup(x) {
+      var i = 0;
+      return function() {
+        return x[i++];
+      }
+    }
+    var next = setup(['a', 'b', 'c']);
+    console.log(next());
+    console.log(next());
+    console.log(next());
+  </script>
+</body>
+
+</html>
