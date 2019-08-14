@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    *{
+      padding: 0;
+      margin: 0;
+      box-sizing: border-box;
+    }
+    html, body {
+      height: 100%;
+    }
+    .sence {
+      height: 100%;
+      border: 1px solid pink;
+      position: relative;
+    }
+    .boy {
+      position: absolute;
+      top: 10px;
+      height: 400px;
+      width: 200px;
+      background: url('./walk.png') no-repeat;
+      background-position: 0 0;
+      animation: step 1s infinite step-start;
+    }
+    @keyframes step {
+      0% {
+        background-position: 0 0;
+      }
+      50% {
+        background-position: -200px 0;
+      }
+      100% {
+        background-position: -400px 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="sence">
+
+  </div>
+</body>
+<script>
+// 使用面向对象的方式实现小男孩行走
+// 把小男孩当做一个对象，使用面向对象的方式，通过构造函数来定义属性和方法，实现代码复用
+let senceDom = document.querySelector('.sence')
+function MoveBoy(left, deltaL) {
+  this.top = Math.random()*200
+  this.left = left
+  this.deltaL = deltaL // 小男孩行走速度
+  this.timer = null
+
+  this.dom = document.createElement('div')
+  this.dom.className = 'boy'
+  senceDom.appendChild(this.dom)
+
+  this.dom.style.left = this.left + 'px'
+  this.dom.style.top = this.top + 'px'
+
+  this.move = function () {
+    setInterval(() => {
+      this.left += this.deltaL
+      this.dom.style.left = this.left + 'px'
+    }, 300);
+  }
+  
+  this.die = function () {
+    clearInterval(this,timer)
+    senceDom.removeChild(this.dom)
+
+  }
+
+  this.move()
+}
+
+var boy = new MoveBoy(20, 6)
+
+setInterval (function () {
+  new MoveBoy((Math.random()*200 +10), (Math.random()*10 +1))
+}, 1000)
+</script>
+</html>

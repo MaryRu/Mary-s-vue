@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+<button onclick="start">发射</button>
+<button onclick="stop" id="test">停止</button>
+</body> 
+</html>
+<script>
+// var id
+// function start() {
+//   var startTime = Date.now();
+//   id = setTimeout(() => {
+//     console.log(Date.now() - startTime)
+//     console.log('发射')
+//   }, 100)
+//   console.log('计时器ID：', id)
+// }
+// function stop() {
+//   clearTimeout(id)
+//   console.log('终止')
+// }
+// 任务队列（先进先出）
+// 微任务队列 Promise 有更高的优先级
+
+// 主线查询微任务队列，按顺序执行所有的微任务
+// 再查询任务队列，取队首任务执行
+
+console.log('script start')
+setTimeout(function () {
+  console.log('setTimeout1')
+  Promise.resolve()
+  .then(function() {
+    console.log('promise3')
+  })
+  .then(function () {
+    console.log('promise4')
+  })
+}, 0) // setTimeout 有一个最小值约定 4ms/10ms
+
+var now = Date.now()
+while (Date.now() - now < 50); // 阻塞50ms
+// 阻塞50ms 为了确保setTimeout的回调函数已经添加到任务队列里了
+Promise.resolve()
+.then(function() {
+  console.log('promise1')
+})
+.then(function () {
+  console.log('promise2')
+})
+
+var now = Date.now()
+while (Date.now() - now < 50); // 阻塞50ms
+
+setTimeout(() => {
+  console.log('setTimeout2')
+}, 0);
+
+console.log('script end')
+
+// js内定时器除了settimeout外，还有removeEventListener
+// removeEventListener方法主要和动画有关，在浏览器重绘之前调用，默认最小间隔时间比settimeout久
+
+var start = null
+var element = document.getElementById('test')
+element.style.position = 'absolute'
+
+function step(timestamp) {
+  if (!start) {
+    console.log('start', start)
+    start = timestamp
+  }
+  var progress = timestamp - start
+  element.style.left = Math.min(progress / 10, 200) + 'px'
+  if (progress < 2000) {
+    window.requestAnimationFrame(step)
+  }
+}
+
+window.requestAnimationFrame(step)
+</script>

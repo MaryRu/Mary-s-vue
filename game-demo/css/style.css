@@ -1,0 +1,48 @@
+body {
+  background-color: #efefef;
+  padding: 0;
+  margin: 0;
+}
+.header {
+  background-color: #fff;
+  padding: 10px 0;
+  border-bottom: 1px solid #ddd;
+}
+.header h1 {
+  font-size: 16px;
+  text-align: center;
+  margin: 0;
+}
+.game-wrap {
+  background-color: #fff;
+  padding: 10px 0;
+  overflow-x: scroll;
+}
+.game-wrap::-webkit-scrollbar {
+  width: 0px;
+}
+.game-wrap ul {
+  margin: 0;
+  padding: 0;
+}
+.game-wrap li {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.game-wrap .game {
+  width: 470px;
+  height: 267px;
+  background: url(../images/paodao.png) no-repeat;
+  background-size: 515px 267px;
+  background-position: -38px 0;
+}
+.game-wrap .game ul {
+  padding-top: 16px;
+}
+.game-wrap .game li {
+  line-height: 0;
+}
+.game-wrap .game img.horse {
+  width: 36px;
+}

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Vue04-Vue计算属性</title>
+</head>
+<body>
+  <!--基础例子-->
+  <div id="example">
+    <p>Original message: "{{ message }}"</p>
+    <p>Computed reversed message: "{{ reversedMessage }}"</p>
+  </div>
+  <!--计算属性 VS Methods-->
+  <div id="example1">
+    <p>Reversed message: "{{ reversedMessage() }}"</p>
+  </div>
+  <!--computed 属性 vs watch 属性-->
+   <div id="example2">
+    <p>{{ fullName }}</p>
+  </div>
+
+  <script src="https://unpkg.com/vue/dist/vue.js"></script>
+  <script src="js/Vue04.js"></script>
+</body>
+</html>

@@ -1,0 +1,81 @@
+body{
+  margin: 0;
+  background: #f6f7af;
+}
+.mao_box{
+ position: relative;
+ top: 100px;
+}
+.mao{
+  margin: 0 auto;
+  width: 400px;
+}
+.mao_head{
+  margin: 0 auto;
+  width: 400px;
+  height: 340px;
+  background: #f6f7f2;
+  position: relative;
+  border-radius: 50% 50% 35% 35%;
+  border: solid 2px #2e2e2e;
+  overflow: hidden;
+  z-index: 10;
+}
+.huawen{
+  position: absolute;
+  height: 160px;
+  width: 180px;
+  background: #8d8d8d;
+  left: 110px; 
+  border-radius:  0 0 50% 50%;
+  overflow: hidden;
+}
+.huawen>div:first-child{
+  background-color: #F0AC6B;
+  height: 160px;
+  width: 90px;
+}
+/* 耳朵  */
+.erduo{
+  width: 374px;
+  height: 120px;
+  position: absolute;
+  top: -6px;
+  left: 50%; 
+  margin-left: -187px;
+  border-radius: 0;
+}
+/*左耳  */
+.erduo>div:first-child{
+  height: 200px;
+  width: 160px;
+  border: 2px solid #2e2e2e;
+  background: #f3f3f3;
+  transform: rotate(-15deg);
+  -ms-transform: rotate(-15deg);
+  -moz-transform: rotate(-15deg);
+  -webkit-transform: rotate(-15deg);
+  -o-transform: rotate(-15deg);
+  border-radius: 4% 80% 0 50%;
+  position: absolute;
+  left: -20px;
+  top: 0;
+  transition: transform 1s,left 1s; 
+}
+/*右耳  */
+.erduo>div:last-child{
+  height: 180px;
+  width: 160px;
+  border: 2px solid #2e2e2e;
+  background: #f3f3f3;
+  transform: rotate(15deg);
+  -ms-transform: rotate(15deg);
+  -moz-transform: rotate(15deg);
+  -webkit-transform: rotate(15deg);
+  -o-transform: rotate(15deg);
+  border-radius: 80% 4% 50% 0;
+  position: absolute;
+  right: -20px;
+  top: 0;
+  transition: transform 1s,right 1s; 
+}

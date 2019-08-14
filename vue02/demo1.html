@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+   <title>Vue - 循环列表、双向绑定、添加数据、删除数据综合实例</title>
+  <link rel="stylesheet" type="" href="css/demo1.css">
+</head>
+
+<body>
+  <div id="app">
+    <!--fieldset元素可将表单内的相关元素分组-->
+    <fieldset>
+      <legend>
+        Create New Person
+      </legend>
+      <div class="form-group">
+        <label for="">Name:</label>
+        <input type="text" v-model="newPerson.name">
+      </div>
+      <div class="form-group">
+        <label for="">Age:</label>
+        <input type="text" v-model="newPerson.age">
+      </div>
+      <div class="form-group">
+        <label for="">Sex:</label>
+        <select v-model="newPerson.sex">
+          <option value="Male">Male</option>
+          <option value="Female">Female</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label></label>
+        <button @click="createPerson">Create</button>
+      </div>
+    </fieldset>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Age</th>
+          <th>Sex</th>
+          <th>Delete</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="(person,index) in people">
+          <td>{{person.name}}</td>
+          <td>{{person.age}}</td>
+          <td>{{person.sex}}</td>
+          <td :class="'text-center'">
+            <button type="" @click="deletePerson(index)">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <script src="https://unpkg.com/vue/dist/vue.js"></script>
+  <script src="js/demo1.js"></script>
+</body>
+
+</html>

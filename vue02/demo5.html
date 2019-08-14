@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Vue - props基础示例</title>
+  <link rel="stylesheet" href="css/demo1.css">
+</head>
+<body>
+  <div id="app">
+    <child-component v-bind:my-name="name" v-bind:my-age="age"></child-component>
+  </div>
+  <template id="myComponent">
+    <table>
+      <tr>
+        <th colspan="2">子组件数据</th>
+      </tr>
+      <tr>
+        <td>my name</td>
+        <td>{{myName}}</td>
+      </tr>
+       <tr>
+        <td>my age</td>
+        <td>{{myAge}}</td>
+      </tr>
+    </table>
+  </template>
+</body>
+<script src="https://unpkg.com/vue/dist/vue.js"></script>
+<script>
+  var vm = new Vue({
+    el:'#app',
+    data:{
+      name:'keepfool',
+      age:28
+    },
+    components:{
+      'child-component':{
+        template:'#myComponent',
+        props:['myName','myAge']
+      }
+    }
+  })
+</script>
+</html>

@@ -1,0 +1,47 @@
+// out: ${workspaceRoot}/game-demo/css/
+body{
+  background-color: #efefef;
+  padding: 0;
+  margin: 0;
+}
+.header{
+  background-color: #fff;
+  padding: 10px 0;
+  border-bottom: 1px solid #ddd;
+  h1{
+    font-size: 16px;
+    text-align: center;
+    margin: 0;
+  }
+}
+.game-wrap{
+  background-color: #fff;
+  padding: 10px 0;
+  overflow-x: scroll;
+  &::-webkit-scrollbar{width:0px}
+  ul{
+    margin: 0;
+    padding: 0;
+  }
+  li{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .game{
+    width: 470px;
+    height: 267px;
+    background: url(../images/paodao.png) no-repeat;
+    background-size: 515px 267px;
+    background-position: -38px 0;
+    ul{
+      padding-top: 16px;
+    }
+    li{
+      line-height: 0;
+    }
+    img.horse{
+      width: 36px;
+    }
+  }
+}

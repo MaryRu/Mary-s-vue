@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Vue - 组件注册语法糖</title>
+</head>
+<body>
+  <div id="app1">
+    <my-compontent1></my-compontent1>
+  </div>
+  ==================app1和app2分割线 =======================
+  <div id="app2">
+    <my-compontent1></my-compontent1>
+    <my-compontent2></my-compontent2>
+    <my-compontent3></my-compontent3>
+  </div>
+  <script src="https://unpkg.com/vue/dist/vue.js"></script>
+  <script>
+    // 全局注册 my-compontent是标签名称
+    Vue.component('my-compontent1',{
+      template:'<div>时光过去，过不去的是美好的记忆</div>'
+    })
+    var vm1 = new Vue({
+      el:'#app1'
+    })
+    var vm2 = new Vue({
+      el:'#app2',
+      components:{
+        // 局部注册,my-compontent2是标签名称
+        'my-compontent2':{
+          template:'<div>影音以在沙绵夜 猛听边僧嗖 影音听干小忒肯 如央是树灾挑豆 威何只省亚弯韵 楼在鳄的听轰 这慢夜 </div>'
+        },
+        // 局部注册,my-compontent3是标签名称
+        'my-compontent3':{
+          template:'<div>他赤这云笛影音是吧嗨喉 忒肯东走东走啧 名誉博医圣凑 </div>'
+        }
+      }
+    })
+  </script>
+</body>
+</html>
